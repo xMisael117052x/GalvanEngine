@@ -33,20 +33,20 @@ BaseApp::initialize() {
         Circle->getComponent<ShapeFactory>()->setPosition(200.0f, 200.0f);
         Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
     }
-
+    
     // Triangle Actor
     Triangle = EngineUtilities::MakeShared<Actor>("Triangle");
     if (!Triangle.isNull()) {
         Triangle->getComponent<ShapeFactory>()->createShape(ShapeType::TRIANGLE);
         //Triangle->getComponent<ShapeFactory>()->getShape()->setFillColor(sf::Color::Blue);
 
-        // NUEVO CODIGO DE PRACTICA
         Triangle->getComponent<ShapeFactory>()->setPosition(100.0f, 100.0f);
-        m_trianglePoints.push_back(sf::Vector2f(100.0f, 100.0f));
-        m_trianglePoints.push_back(sf::Vector2f(700.0f, 100.0f));
-        m_trianglePoints.push_back(sf::Vector2f(700.0f, 500.0f));
-        m_trianglePoints.push_back(sf::Vector2f(100.0f, 500.0f));
-        m_currentTargetIndex = 0;
+        std::vector<sf::Vector2f> m_trianglePoints = {
+            {100.0f, 100.0f},
+            {700.0f, 100.0f},
+            {700.0f, 500.0f},
+            {100.0f, 500.0f}
+        };
         m_speed = 200.0f;
     }
 
@@ -67,6 +67,14 @@ BaseApp::update() {
             deltaTime.asSeconds(),
             50.0f);
     }
+
+    if (!Triangle.isNull()) {
+        auto shapeFactoryPtr = Triangle->getComponent<ShapeFactory>();
+        ShapeFactory* shapeFactory = shapeFactoryPtr.get();
+        if (shapeFactory != nullptr) {
+            shapeFactory->MoveCoords(m_trianglePoints, m_speed, deltaTime.asSeconds());
+        }
+    }
 }
 
 // Funcion de renderizado
@@ -75,10 +83,6 @@ BaseApp::render() {
     m_window->clear();
     Triangle->render(*m_window);
     Circle->render(*m_window);
-    // if(!Triangle.isNull())
-    // {
-    //     m_window->draw(*Triangle->getComponent<ShapeFactory>()->getShape());
-    // }
     m_window->display();
 }
 

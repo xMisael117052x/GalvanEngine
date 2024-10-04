@@ -12,21 +12,21 @@ public:
      * @brief Destructor virtual.
      */
     virtual
-        ~Entity() = default;
+    ~Entity() = default;
 
     /*
-     * @brief Método virtual puro para actualizar la entidad
-     * @param deltaTime El tiempo transcurrido desde la última actualización.
+     * @brief Mï¿½todo virtual puro para actualizar la entidad
+     * @param deltaTime El tiempo transcurrido desde la ï¿½ltima actualizaciï¿½n.
      */
     virtual void
-        update(float deltaTime) = 0;
+    update(float deltaTime) = 0;
 
     /*
-     * @brief Método virtual puro para renderizar la entidad.
-     * @param window Contexto del dispositivo para operaciones gráficas.
+     * @brief Mï¿½todo virtual puro para renderizar la entidad.
+     * @param window Contexto del dispositivo para operaciones grï¿½ficas.
      */
     virtual void
-        render(Window& window) = 0;
+    render(Window& window) = 0;
 
     /*
      * @brief Agrega un componente a la entidad.

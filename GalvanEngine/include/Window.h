@@ -9,19 +9,19 @@ public:
     ~Window();
 
     void
-        handleEvents();
+    handleEvents();
 
     /**
      * @brief Limpia el contenido de la ventana con el color predeterminado.
      */
     void
-        clear();
+    clear();
 
     /**
      * @brief Muestra el contenido de la ventana en la pantalla.
      */
     void
-        display();
+    display();
 
     /**
      * @brief Verifica si la ventana sigue abierta.
@@ -29,7 +29,7 @@ public:
      * @return true si la ventana est? abierta, false en caso contrario.
      */
     bool
-        isOpen() const;
+    isOpen() const;
 
     /**
      * @brief Dibuja un objeto que puede ser dibujado en la ventana.
@@ -37,7 +37,7 @@ public:
      * @param drawable Referencia a un objeto SFML que puede ser dibujado.
      */
     void
-        draw(const sf::Drawable& drawable);
+    draw(const sf::Drawable& drawable);
 
     /**
      * @brief Obtiene el objeto interno SFML RenderWindow.
@@ -45,22 +45,22 @@ public:
      * @return Un puntero al objeto interno SFML RenderWindow.
      */
     sf::RenderWindow*
-        getWindow();
+     getWindow();
 
     // Funcion de inicializacion
     void
-        init();
+    init();
 
     // Funcion que se actualiza por frame
     void
-        update();
+    update();
 
     // Funcion de renderizado
     void
-        render();
+    render();
 
     void
-        destroy();
+    destroy();
 
 private:
     sf::RenderWindow* m_window;

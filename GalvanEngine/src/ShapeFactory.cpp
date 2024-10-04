@@ -50,20 +50,49 @@ ShapeFactory::Seek(const sf::Vector2f& targetPosition,
     float speed,
     float deltaTime,
     float range) {
-    // Obtener la posición actual de mi shape
+    // Obtener la posiciï¿½n actual de mi shape
     sf::Vector2f shapePosition = m_shape->getPosition();
 
-    // Calcular la dirección desde el círculo hacia el objetivo
-    // Nota: Dirección es la pi - pf
+    // Calcular la direcciï¿½n desde el cï¿½rculo hacia el objetivo
+    // Nota: Direcciï¿½n es la pi - pf
     sf::Vector2f direction = targetPosition - shapePosition;
 
     // Calcular la distancia al objetivo
     float lenght = std::sqrt(direction.x * direction.x + direction.y * direction.y);
 
-    // Sí la distancia es mayor que el rango, mover la shape hacia el objetivo
-    if (lenght > range)
-    {
+    // Sï¿½ la distancia es mayor que el rango, mover la shape hacia el objetivo
+    if (lenght > range) {
         direction /= lenght;
         m_shape->move(direction * speed * deltaTime);
     }
 }
+
+void
+ShapeFactory::MoveCoords(const std::vector<sf::Vector2f>& points, float speed, float deltaTime) {
+    if (points.empty()) {
+        return;
+    }
+
+    static int currentTargetIndex = 0;
+
+    sf::Vector2f shapePosition = m_shape->getPosition();
+
+    sf::Vector2f targetPosition = points[currentTargetIndex];
+
+    sf::Vector2f direction = targetPosition - shapePosition;
+
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+    if (length < 5.0f) {
+        currentTargetIndex = (currentTargetIndex + 1) % points.size(); 
+        targetPosition = points[currentTargetIndex];
+        direction = targetPosition - shapePosition;
+        length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    }
+
+    if (length > 0.0f) {
+        direction /= length;
+        m_shape->move(direction * speed * deltaTime);
+    }
+}
+

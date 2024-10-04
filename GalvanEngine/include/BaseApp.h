@@ -12,23 +12,23 @@ public:
 
     // Funcion que corre el programa en main
     int
-        run();
+    run();
 
     // Funcion de inicializacion
     bool
-        initialize();
+    initialize();
 
     // Funcion que se actualiza por frame
     void
-        update();
+    update();
 
     // Funcion de renderizado
     void
-        render();
+    render();
 
     // Funcion de liberacion de memoria
     void
-        cleanup();
+    cleanup();
 
 private:
     sf::Clock clock;
@@ -38,8 +38,6 @@ private:
     EngineUtilities::TSharedPointer<Actor> Triangle;
     EngineUtilities::TSharedPointer<Actor> Circle;
 
-    // NUEVO CODIGO DE PRACTICA
     std::vector<sf::Vector2f> m_trianglePoints;
-    int m_currentTargetIndex;
     float m_speed;
 };

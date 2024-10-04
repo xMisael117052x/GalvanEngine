@@ -9,7 +9,7 @@ public:
     ShapeFactory() = default;
 
     virtual
-        ~ShapeFactory() = default;
+    ~ShapeFactory() = default;
 
     ShapeFactory(ShapeType shapeType) :
         m_shape(nullptr), m_shapeType(ShapeType::EMPTY), Component(ComponentType::SHAPE) { }
@@ -19,33 +19,34 @@ public:
 
     /*
      * @brief Actualiza el componente de malla.
-     * @param deltaTime El tiempo transcurrido desde la última actualización.
+     * @param deltaTime El tiempo transcurrido desde la ï¿½ltima actualizaciï¿½n.
      */
     void
-        update(float deltaTime) override { }
+    update(float deltaTime) override { }
 
     /*
      * @brief Renderiza el componente de malla.
-     * @param window Contexto del dispositivo para operaciones gráficas.
+     * @param window Contexto del dispositivo para operaciones grï¿½ficas.
      */
     void
-        render(Window window) override { }
+    render(Window window) override { }
 
     void
-        setPosition(float x, float y);
+    setPosition(float x, float y);
 
     void
-        setPosition(const sf::Vector2f& position);
+    setPosition(const sf::Vector2f& position);
 
     void
-        setFillColor(const sf::Color& color);
+    setFillColor(const sf::Color& color);
 
     void
-        Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
+    Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
 
-
+    void MoveCoords(const std::vector<sf::Vector2f>& points, float speed, float deltaTime);
+    
     sf::Shape*
-        getShape() {
+    getShape() {
         return m_shape;
     }
 

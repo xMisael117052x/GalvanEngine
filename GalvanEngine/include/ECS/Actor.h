@@ -16,27 +16,27 @@ public:
      * @brief Destructor por defecto.
      */
     virtual
-        ~Actor() = default;
+    ~Actor() = default;
 
     /*
      * @brief Actualiza el actor.
-     * @param deltaTime El tiempo transcurrido desde la última actualización.
+     * @param deltaTime El tiempo transcurrido desde la ï¿½ltima actualizaciï¿½n.
      */
     void
-        update(float deltaTime) override;
+    update(float deltaTime) override;
 
     /*
      * @brief Renderiza el actor.
-     * @param window Contexto del dispositivo para operaciones gráficas.
+     * @param window Contexto del dispositivo para operaciones grï¿½ficas.
      */
     void
-        render(Window& window) override;
+    render(Window& window) override;
 
     /*
      * @brief Destruye el actor y libera los recursos asociados.
      */
     void
-        destroy();
+    destroy();
 
     /*
      * @brief Obtiene un componente especifico del actor.
@@ -52,9 +52,9 @@ private:
 };
 
 /*
- * El propósito de esta función es buscar y devolver un componente especifico de un actor,
+ * El propï¿½sito de esta funciï¿½n es buscar y devolver un componente especifico de un actor,
  * utilizando el tipo de componente especificado como argumento de la plantilla.
- * Si el componente no se encuentre, la función devuelve nullptr.
+ * Si el componente no se encuentre, la funciï¿½n devuelve nullptr.
  */
 template<typename T>
 inline EngineUtilities::TSharedPointer<T>
@@ -65,6 +65,6 @@ Actor::getComponent() {
             return specificComponent;
         }
     }
-    // Devuelve un TSharedPointer vacío si no se encuentra el componente
+    // Devuelve un TSharedPointer vacï¿½o si no se encuentra el componente
     return EngineUtilities::TSharedPointer<T>();
 }

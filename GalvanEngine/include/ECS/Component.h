@@ -20,7 +20,7 @@ enum ComponentType {
  * @class Component
  * @brief Clase abstracta para todos los componentes del juego
  *
- * La clase Component define la interfaz básica que todos los componentes deben implementar,
+ * La clase Component define la interfaz bï¿½sica que todos los componentes deben implementar,
  * permitiendo actualizar y renderizar el componente, asi como obtener su tipo.
  */
 class
@@ -41,28 +41,28 @@ public:
      * @brief Destructor virtual.
      */
     virtual
-        ~Component() = default;
+    ~Component() = default;
 
     /*
-     * @brief Método virtual puro para actualizar el componente,
-     * @param deltaTime El tiempo transcurrido desde la última actualización.
+     * @brief Mï¿½todo virtual puro para actualizar el componente,
+     * @param deltaTime El tiempo transcurrido desde la ï¿½ltima actualizaciï¿½n.
      */
     virtual void
-        update(float deltaTime) = 0;
+    update(float deltaTime) = 0;
 
     /*
-     * @brief Método virtual puro para renderizar el componente.
-     * @param Window Contexto del dispositivo para operaciones gráficas.
+     * @brief Mï¿½todo virtual puro para renderizar el componente.
+     * @param Window Contexto del dispositivo para operaciones grï¿½ficas.
      */
     virtual void
-        render(Window window) = 0;
+    render(Window window) = 0;
 
     /*
      * @brief Obtiene el tipo del componente.
      * @return El tipo del componente.
      */
     ComponentType
-        getType() const { return m_type; }
+    getType() const { return m_type; }
 
 protected:
     ComponentType m_type; // Tipo de componente
