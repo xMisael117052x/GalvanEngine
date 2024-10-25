@@ -2,7 +2,7 @@
 #include "Prerequisites.h"
 #include "Window.h"
 #include "ShapeFactory.h"
-#include "ECS/Actor.h"
+#include "Actor.h"
 
 class
 BaseApp {
@@ -30,14 +30,29 @@ public:
     void
     cleanup();
 
-private:
-    sf::Clock clock;
-    sf::Time deltaTime;
+    void
+	updateMovement(float deltaTime, EngineUtilities::TSharedPointer<Actor> circle);
 
+private:
     Window* m_window;
     EngineUtilities::TSharedPointer<Actor> Triangle;
     EngineUtilities::TSharedPointer<Actor> Circle;
+    EngineUtilities::TSharedPointer<Actor> Track;
 
-    std::vector<sf::Vector2f> m_trianglePoints;
-    float m_speed;
+    int currentWaypoint = 0;
+
+    std::vector<sf::Vector2f> waypoints = {
+     {720.0f, 350.0f},
+     {720.0f, 260.0f},
+     {125.0f, 50.0f},
+     {70.0f, 120.0f},
+     {70.0f, 450.0f},
+     {400.0f, 350.0f},
+     {550.0f, 500.0f},
+     {650.0f, 550.0f},
+     {720.0f, 450.0f}
+    };
+
+    sf::Texture texture;
+    sf::Texture characterTexture;
 };

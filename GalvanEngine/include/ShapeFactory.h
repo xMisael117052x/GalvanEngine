@@ -1,6 +1,6 @@
 #pragma once
 #include "Prerequisites.h"
-#include "ECS/Component.h"
+#include "Component.h"
 #include "Window.h"
 
 class
@@ -15,19 +15,11 @@ public:
         m_shape(nullptr), m_shapeType(ShapeType::EMPTY), Component(ComponentType::SHAPE) { }
 
     sf::Shape*
-        createShape(ShapeType shapeType);
+    createShape(ShapeType shapeType);
 
-    /*
-     * @brief Actualiza el componente de malla.
-     * @param deltaTime El tiempo transcurrido desde la �ltima actualizaci�n.
-     */
     void
     update(float deltaTime) override { }
 
-    /*
-     * @brief Renderiza el componente de malla.
-     * @param window Contexto del dispositivo para operaciones gr�ficas.
-     */
     void
     render(Window window) override { }
 
@@ -41,12 +33,16 @@ public:
     setFillColor(const sf::Color& color);
 
     void
-    Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
+    setRotation(float angle);
 
-    void MoveCoords(const std::vector<sf::Vector2f>& points, float speed, float deltaTime);
-    
+    void
+    setScale(const sf::Vector2f& scl);
+
+    void
+    MoveTriangle(const std::vector<sf::Vector2f>& points, int& targetIndex, float speed, float deltaTime);
+
     sf::Shape*
-    getShape() {
+        getShape() {
         return m_shape;
     }
 

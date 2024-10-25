@@ -9,19 +9,37 @@ Window::Window(int width, int height, const std::string& title) {
     else {
         MESSAGE("Window", "Window", "OK");
     }
+
+    ImGui::SFML::Init(*m_window);
 }
 
 Window::~Window() {
+    ImGui::SFML::Shutdown();
     delete m_window;
 }
 
 void
 Window::handleEvents() {
     sf::Event event;
-    while (m_window->pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
+    while (m_window->pollEvent(event)) {
+        ImGui::SFML::ProcessEvent(event);
+
+        switch (event.type) {
+        case sf::Event::Closed:
             m_window->close();
+            break;
+        case sf::Event::Resized:
+            // Manejar el evento de redimensionar
+            // Obtener el nuevo tamaño de la ventana
+            unsigned int newWidth = event.size.width;
+            unsigned int newHeight = event.size.height;
+
+            // Opcional: Redefinir el tamaño de la vista para ajustarse al nuevo tamaño de la ventana
+            sf::View view = m_window->getView();
+            view.setSize(static_cast<float>(newWidth), static_cast<float>(newHeight));
+            m_window->setView(view);
+            break;
+        }
     }
 }
 
@@ -75,6 +93,19 @@ Window::getWindow() {
         ERROR("Window", "getWindow", "CHECK FOR WINDOW POINTER DATA");
         return nullptr;
     }
+}
+
+void
+Window::update() {
+    // Almacena el deltaTime una sola vez
+    deltaTime = clock.restart();
+    // Usa ese deltaTime para actualizar ImGui
+    ImGui::SFML::Update(*m_window, deltaTime);
+}
+
+void
+Window::render() {
+    ImGui::SFML::Render(*m_window);
 }
 
 void

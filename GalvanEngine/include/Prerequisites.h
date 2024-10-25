@@ -9,10 +9,13 @@
 
 // Third Parties
 #include <SFML/Graphics.hpp>
-#include <Memory/\TSharedPointer.h>
-#include <Memory/\TWeakPointer.h>
-#include <Memory/\TStaticPtr.h>
-#include <Memory/\TUniquePtr.h>
+#include <TSharedPointer.h>
+#include <TWeakPointer.h>
+#include <TStaticPtr.h>
+#include <TUniquePtr.h>
+
+#include <imgui.h>
+#include <imgui-SFML.h>
 
 // Enums
 enum
