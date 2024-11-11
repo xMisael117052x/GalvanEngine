@@ -38,6 +38,36 @@ public:
     void
     destroy();
 
+    /**
+	* @brief Obtiene el nombre del actor.
+	* @return Nombre del actor.
+	*/
+    std::string getName() const
+    {
+        return n_name;
+    }
+
+    /**
+     * @brief Establece el nombre del actor.
+     * @param name El nuevo nombre del actor.
+     */
+    void
+        setName(const std::string& name)
+    {
+        n_name = name;
+    }
+
+    /**
+	* @brief Obtiene una lista de componentes del actor.
+	* @return Lista de componentes.
+	*/
+    const std::vector<EngineUtilities::TSharedPointer<Component>>&
+        getComponents() const
+    {
+        return components;
+    }
+
+
     /*
      * @brief Obtiene un componente especifico del actor.
      * @tparam T Tipo del componente que se va a obtener.

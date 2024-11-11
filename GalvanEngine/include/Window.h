@@ -47,6 +47,24 @@ public:
     sf::RenderWindow*
      getWindow();
 
+    /**
+     * @brief Renderiza el contenido actual a una textura.
+     *
+     * Este método captura la escena o contenido actual y lo renderiza en una textura en lugar de en la ventana principal.
+     * Puede ser útil para efectos de post-procesado o para renderizar elementos en una interfaz gráfica.
+     */
+    void
+	renderToTexture();
+
+    /**
+     * @brief Muestra contenido en la interfaz de usuario de ImGui.
+     *
+     * Este método permite integrar y mostrar contenido generado por ImGui dentro de la ventana,
+     * facilitando la creación de interfaces gráficas interactivas y personalizadas.
+     */
+    void
+	showInImGui();
+
     // Funcion de inicializacion
     void
     init();
@@ -64,6 +82,8 @@ public:
 
     sf::Clock clock;
     sf::Time deltaTime;
+    sf::RenderTexture m_renderTexture;
 private:
     sf::RenderWindow* m_window;
+    sf::View m_view;
 };

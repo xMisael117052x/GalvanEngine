@@ -3,12 +3,13 @@
 #include "Window.h"
 #include "ShapeFactory.h"
 #include "Actor.h"
+#include "GUI.h"
 
 class
 BaseApp {
 public:
     BaseApp() = default;
-    ~BaseApp() = default;
+    ~BaseApp();
 
     // Funcion que corre el programa en main
     int
@@ -55,4 +56,9 @@ private:
 
     sf::Texture texture;
     sf::Texture characterTexture;
+
+    std::vector< EngineUtilities::TSharedPointer<Actor>> m_actors;
+    EngineUtilities::TSharedPointer<Actor> m_selectedActor;
+
+    GUI m_GUI;
 };
