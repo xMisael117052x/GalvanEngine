@@ -50,12 +50,18 @@
     <ClInclude Include="include\GUI.h" />
     <ClInclude Include="include\NotificationService.h" />
     <ClInclude Include="include\Prerequisites.h" />
+    <ClInclude Include="include\Quaternion.h" />
+    <ClInclude Include="include\ResourceManager.h" />
     <ClInclude Include="include\ShapeFactory.h" />
+    <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Transform.h" />
     <ClInclude Include="include\TSharedPointer.h" />
     <ClInclude Include="include\TStaticPtr.h" />
     <ClInclude Include="include\TUniquePtr.h" />
     <ClInclude Include="include\TWeakPointer.h" />
+    <ClInclude Include="include\Vector2.h" />
+    <ClInclude Include="include\Vector3.h" />
+    <ClInclude Include="include\Vector4.h" />
     <ClInclude Include="include\Window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

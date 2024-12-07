@@ -28,6 +28,9 @@
     <Filter Include="Archivos de encabezado\Services">
       <UniqueIdentifier>{c9e92319-674c-4baa-8fe3-e5acf5e27e9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Vectores">
+      <UniqueIdentifier>{7300ca1c-a2d4-4773-bd6f-6b7c825cdd6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GalvanEngine.cpp">
@@ -139,6 +142,18 @@
     </ClInclude>
     <ClInclude Include="include\GUI.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vector2.h">
+      <Filter>Archivos de encabezado\Vectores</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vector3.h">
+      <Filter>Archivos de encabezado\Vectores</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vector4.h">
+      <Filter>Archivos de encabezado\Vectores</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Quaternion.h">
+      <Filter>Archivos de encabezado\Vectores</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

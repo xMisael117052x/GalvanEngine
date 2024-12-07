@@ -8,6 +8,7 @@
 #include <thread>
 #include <map>
 #include <fstream>
+#include <cmath>
 
 // Third Parties
 #include <SFML/Graphics.hpp>
@@ -15,6 +16,21 @@
 #include <TWeakPointer.h>
 #include <TStaticPtr.h>
 #include <TUniquePtr.h>
+#include <Vector2.h>
+#include <Vector3.h>
+#include <Vector4.h>
+#include <Quaternion.h>
+
+// Todos los h
+#include "Window.h"
+#include "Actor.h"
+#include "GUI.h"
+#include "Entity.h"
+#include "Component.h"
+#include "Texture.h"
+#include "ShapeFactory.h"
+#include "Transform.h"
+#include "NotificationService.h"
 
 #include <imgui.h>
 #include <imgui-SFML.h>
@@ -29,7 +45,7 @@ ShapeType {
 };
 
 enum
-ConsolErrorType {
+ConsoleErrorType {
     INFO = 0,
     WARNING = 1,
     ERROR = 2

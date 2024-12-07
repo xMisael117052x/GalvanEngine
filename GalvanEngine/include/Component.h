@@ -1,72 +1,61 @@
 #pragma once
-class
-Window;
+class Window;
 
-/*
+/**
  * @enum ComponentType
- * @brief Tipos de componentes disponibles en el juego.
+ * @brief Clasificación de los tipos de componentes disponibles en el juego.
  */
-enum ComponentType {
-    NONE = 0,
-    TRANSFORM = 1,
-    SPRITE = 2,
-    RENDERER = 3,
-    PHYSICS = 4,
-    AUDIOSOURCE = 5,
-    SHAPE = 6
+enum ComponentType
+{
+    NONE = 0, ///< Sin tipo definido.
+    TRANSFORM = 1, ///< Componente de transformación.
+    SPRITE = 2, ///< Componente de sprite.
+    RENDERER = 3, ///< Componente de renderizado.
+    PHYSICS = 4, ///< Componente de física.
+    AUDIOSOURCE = 5, ///< Componente de audio.
+    SHAPE = 6, ///< Componente de forma.
+    TEXTURE = 7 ///< Componente de textura.
 };
 
-/*
- * @class Component
- * @brief Clase abstracta para todos los componentes del juego
- *
- * La clase Component define la interfaz b�sica que todos los componentes deben implementar,
- * permitiendo actualizar y renderizar el componente, asi como obtener su tipo.
- */
-class
-Component {
+class Component
+{
 public:
-    /*
-     * @brief Constructor por defecto
+    /**
+     * @brief Constructor por defecto de Component.
      */
     Component() = default;
 
-    /*
-     * @brief Constructor con tipo de componente.
-     * @param type Tipo del componente.
+    /**
+     * @brief Constructor que inicializa un componente con un tipo específico.
+     * @param type Tipo del componente a inicializar.
      */
-    Component(const ComponentType type) : m_type(type) { }
+    Component(const ComponentType type) : m_type(type)
+    {
+    }
 
-    /*
-     * @brief Destructor virtual.
+    /**
+     * @brief Destructor virtual, necesario para permitir la eliminación limpia de herencias.
      */
-    virtual
-    ~Component() = default;
+    virtual ~Component() = default;
 
-    virtual
-        std::string getTypeName() const = 0;
-
-    /*
-     * @brief Metodo virtual puro para actualizar el componente,
-     * @param deltaTime El tiempo transcurrido desde la �ltima actualizaci�n.
+    /**
+     * @brief Método virtual puro que actualiza el estado del componente.
+     * @param deltaTime Tiempo transcurrido desde la última actualización.
      */
-    virtual void
-    update(float deltaTime) = 0;
+    virtual void update(float deltaTime) = 0;
 
-    /*
-     * @brief Metodo virtual puro para renderizar el componente.
-     * @param Window Contexto del dispositivo para operaciones gr�ficas.
+    /**
+     * @brief Método virtual puro que maneja el renderizado del componente.
+     * @param window Objeto Window que representa el contexto gráfico.
      */
-    virtual void
-    render(Window window) = 0;
+    virtual void render(Window window) = 0;
 
-    /*
-     * @brief Obtiene el tipo del componente.
-     * @return El tipo del componente.
+    /**
+     * @brief Devuelve el tipo del componente.
+     * @return Tipo de componente almacenado.
      */
-    ComponentType
-    getType() const { return m_type; }
+    ComponentType getType() const { return m_type; }
 
 protected:
-    ComponentType m_type; // Tipo de componente
+    ComponentType m_type; ///< Tipo de Componente actual.
 };

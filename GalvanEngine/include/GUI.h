@@ -1,85 +1,72 @@
 #pragma once
-#include <map>
-
 #include "Prerequisites.h"
 
-class
-    Actor;
+class Actor;
+class Window;
 
-class
-    Window;
-
-class
-    GUI {
+class GUI
+{
 public:
     /**
-     * @brief Constructor por defecto.
+     * @brief Constructor por defecto del sistema de interfaz gráfica de usuario.
      */
     GUI() = default;
 
     /**
-     * @brief Destructor por defecto.
+     * @brief Destructor por defecto del sistema de interfaz gráfica de usuario.
      */
     ~GUI() = default;
 
     /**
-     * @brief Inicializa la ventana.
+     * @brief Inicializa los elementos y recursos necesarios para la interfaz.
      */
-    void
-        init();
+    void init();
 
     /**
-     * @brief Actualiza la ventana.
+     * @brief Actualiza el estado y comportamiento de la interfaz.
      */
-    void
-        update();
+    void update();
 
     /**
-     * @brief Renderiza el contenido.
+     * @brief Renderiza todos los elementos visuales de la interfaz.
      */
-    void
-        render();
+    void render();
 
     /**
-    * @brief Destruye la ventana.
-    */
-    void
-        destroy();
-
-    /**
-    * @brief Declara los estilos de la ventana.
-    */
-    void
-        setupGUIStyle();
-
-    /**
-     * @brief Muestra el outliner con la lista de actores.
-     * @param actors Vector de actores a listar.
+     * @brief Libera los recursos y destruye los elementos de la interfaz.
      */
-    void
-        jerarquia(std::vector<EngineUtilities::TSharedPointer<Actor>> actors);
+    void destroy();
 
     /**
-    * @brief Muestra una consola con mensajes del programa.
-    * @param programMessages Mapa de mensajes del programa categorizados por tipo de error.
-    */
-    void
-        console(const std::map<ConsolErrorType, std::vector<std::string>>& programMessages);
-
-    /**
-     * @brief Permite colocar actores en la escena.
-     * @param actors Vector de actores en la escena.
+     * @brief Configura los estilos visuales de la interfaz gráfica.
      */
-    void
-        placeActors(std::vector<EngineUtilities::TSharedPointer<Actor>>& actors);
+    void setupGUIStyle();
 
     /**
-    * @brief Muestra el inspector del actor seleccionado con sus componentes.
-    * @param actors Vector de actores a inspeccionar.
-    */
-    void
-        inspector(std::vector<EngineUtilities::TSharedPointer<Actor>> actors);
+     * @brief Despliega una jerarquía con la lista de actores presentes.
+     * @param actors Vector que contiene los actores a incluir en la lista.
+     */
+    void jerarquia(std::vector<EngineUtilities::TSharedPointer<Actor>> actors);
+
+    /**
+     * @brief Muestra una consola con mensajes agrupados por tipo de error.
+     * @param programMessages Mapa que contiene los mensajes de error categorizados.
+     */
+    void console(const std::map<ConsoleErrorType, std::vector<std::string>>& programMessages);
+
+    /**
+     * @brief Posiciona actores dentro de la escena interactiva.
+     * @param actors Vector de actores actualmente presentes en la escena.
+     */
+    void placeActors(std::vector<EngineUtilities::TSharedPointer<Actor>>& actors);
+
+    /**
+     * @brief Muestra detalles del actor seleccionado y sus componentes en el inspector.
+     * @param actors Vector que contiene los actores a ser inspeccionados.
+     */
+    void inspector(std::vector<EngineUtilities::TSharedPointer<Actor>> actors);
 
 private:
-    EngineUtilities::TSharedPointer<Actor> m_actors;
+    EngineUtilities::TSharedPointer<Actor> m_actors; ///< Puntero al actor o conjunto de actores manejados.
+    int selectedActorIndex = -1;
 };

@@ -2,55 +2,53 @@
 #include "Prerequisites.h"
 #include "Component.h"
 
-class
-Window;
+class Window;
 
-class
-Entity {
+class Entity
+{
 public:
-    /*
-     * @brief Destructor virtual.
+    /**
+     * @brief Destructor virtual necesario para la correcta eliminación de recursos en la herencia.
      */
-    virtual
-    ~Entity() = default;
+    virtual ~Entity() = default;
 
-    /*
-     * @brief Metodo virtual puro para actualizar la entidad
-     * @param deltaTime El tiempo transcurrido desde la �ltima actualizaci�n.
+    /**
+     * @brief Método virtual puro para actualizar la lógica de la entidad.
+     * @param deltaTime Tiempo transcurrido desde la última actualización.
      */
-    virtual void
-    update(float deltaTime) = 0;
+    virtual void update(float deltaTime) = 0;
 
-    /*
-     * @brief M�todo virtual puro para renderizar la entidad.
-     * @param window Contexto del dispositivo para operaciones gr�ficas.
+    /**
+     * @brief Método virtual puro para manejar el renderizado de la entidad.
+     * @param window Contexto gráfico utilizado para el renderizado.
      */
-    virtual void
-    render(Window& window) = 0;
+    virtual void render(Window& window) = 0;
 
-    /*
+    /**
      * @brief Agrega un componente a la entidad.
-     * @tparam T Tipo del componente, debe derivar de Component.
+     * @tparam T Tipo del componente, debe derivarse de Component.
      * @param component Puntero compartido al componente que se va a agregar.
      */
     template <typename T>
-    void
-        addComponent(EngineUtilities::TSharedPointer<T> component) {
+    void addComponent(EngineUtilities::TSharedPointer<T> component)
+    {
         static_assert(std::is_base_of<Component, T>::value, "T must be derived from Component");
         components.push_back(component.template dynamic_pointer_cast<Component>());
     }
 
-    /*
-     * @brief Obtiene un componente de la entidad
-     * @tparam T Tipo del componente que se va a obtener.
-     * @return Puntero compartido al componente, o nullptr si no se encuentra.
+    /**
+     * @brief Obtiene un componente específico de la entidad.
+     * @tparam T Tipo del componente que se va a buscar.
+     * @return Puntero compartido al componente encontrado, o nullptr si no existe.
      */
     template <typename T>
-    EngineUtilities::TSharedPointer<T>
-        getComponent() {
-        for (auto& component : components) {
+    EngineUtilities::TSharedPointer<T> getComponent()
+    {
+        for (auto& component : components)
+        {
             EngineUtilities::TSharedPointer<T> specificComponent = component.template dynamic_pointer_cast<T>();
-            if (specificComponent) {
+            if (specificComponent)
+            {
                 return specificComponent;
             }
         }
@@ -58,8 +56,9 @@ public:
     }
 
 protected:
-    bool isActive;
-    int id;
+    bool isActive; ///< Estado de actividad de la entidad.
+    int id; ///< Identificador único asociado a la entidad.
 
     std::vector<EngineUtilities::TSharedPointer<Component>> components;
+    ///< Colección de componentes que pertenecen a la entidad.
 };

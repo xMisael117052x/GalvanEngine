@@ -1,86 +1,101 @@
 #pragma once
 #include "Prerequisites.h"
-#include "Component.h"
-#include "Window.h"
 
 /**
- * @brief Clase que gestiona la transformaciÛn de un objeto, incluyendo posiciÛn, rotaciÛn y escala.
+ * @brief Clase que representa un componente de transformaci√≥n aplicado a objetos en un espacio 2D.
+ *        Hereda de la clase base 'Component'.
  */
-class
-Transform : public Component {
+class Transform : public Component
+{
 public:
     /**
-     * @brief Constructor de la clase Transform.
-     * Inicializa la posiciÛn en (0, 0), la rotaciÛn en (0, 0) y la escala en (1, 1).
+     * @brief Constructor por defecto.
      */
     Transform() : position(0.0f, 0.0f),
-        rotation(0.0f, 0.0f),
-        scale(1.0f, 1.0f),
-        Component(ComponentType::TRANSFORM) { }
+                  rotation(0.0f, 0.0f),
+                  scale(1.0f, 1.0f),
+                  Component(ComponentType::TRANSFORM)
+    {
+    }
 
     /**
-     * @brief Destructor de la clase Transform.
-     * El destructor por defecto es suficiente.
+     * @brief Destructor virtual.
      */
-    virtual
-	~Transform() = default;
+    virtual ~Transform() = default;
 
     /**
-     * @brief MÈtodo de actualizaciÛn. (VacÌo en este caso)
-     * @param deltaTime Tiempo transcurrido desde la ˙ltima actualizaciÛn.
+     * @brief Actualiza el componente.
+     * @param deltaTime Tiempo transcurrido desde la √∫ltima actualizaci√≥n.
      */
-    void
-	update(float deltaTime) override { }
+    void update(float deltaTime) override
+    {
+        // L√≥gica de actualizaci√≥n
+    }
 
     /**
-     * @brief MÈtodo de renderizado. (VacÌo en este caso)
-     * @param window Ventana donde se renderizar·.
+     * @brief Renderiza el componente.
+     * @param window Contexto de la ventana para operaciones gr√°ficas.
      */
-    void
-	render(Window window) override { }
+    void render(Window window) override
+    {
+        // L√≥gica de renderizado
+    }
 
     /**
-     * @brief MÈtodo para destruir el objeto Transform. (VacÌo en este caso)
+     * @brief Destruye el componente.
      */
-    void
-	destroy() { }
+    void destroy()
+    {
+        // L√≥gica de destrucci√≥n
+    }
 
     /**
-     * @brief Mueve el objeto hacia una posiciÛn objetivo a una velocidad especÌfica.
-     * @param targetPosition PosiciÛn objetivo.
+     * @brief Actualiza la posici√≥n del objeto buscando un objetivo.
+     * @param targetPosition Posici√≥n objetivo.
      * @param speed Velocidad de movimiento.
-     * @param deltaTime Tiempo transcurrido desde la ˙ltima actualizaciÛn.
-     * @param range Distancia mÌnima para moverse hacia el objetivo.
+     * @param deltaTime Tiempo transcurrido desde la √∫ltima actualizaci√≥n.
+     * @param range Rango dentro del cual buscar el objetivo.
      */
-    void
-	Seek(const sf::Vector2f& targetPosition,
-        float speed,
-        float deltaTime,
-        float range) {
-        sf::Vector2f direction = targetPosition - position;
-        float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    void Seek(const Vector2& targetPosition, float speed, float deltaTime, float range)
+    {
+        Vector2 direction = targetPosition - position;
+        float length = direction.magnitude();
 
-        if (length > range) {
-            direction /= length;
+        if (length > range)
+        {
+            direction.normalize(); // Normaliza el vector
             position += direction * speed * deltaTime;
         }
     }
 
     /**
-     * @brief Establece la posiciÛn del objeto.
-     * @param _position Nueva posiciÛn.
+     * @brief Establece las transformaciones del objeto.
+     * @param _position Nueva posici√≥n.
+     * @param _rotation Nueva rotaci√≥n.
+     * @param _scale Nueva escala.
      */
-    void
-	setPosition(const sf::Vector2f& _position) {
+    void setTransform(const Vector2& _position, const Vector2& _rotation, const Vector2& _scale)
+    {
+        position = _position;
+        rotation = _rotation;
+        scale = _scale;
+    }
+
+    /**
+     * @brief Establece la posici√≥n del objeto.
+     * @param _position Nueva posici√≥n.
+     */
+    void setPosition(const Vector2& _position)
+    {
         position = _position;
     }
 
     /**
-     * @brief Establece la rotaciÛn del objeto.
-     * @param _rotation Nueva rotaciÛn.
+     * @brief Establece la rotaci√≥n del objeto.
+     * @param _rotation Nueva rotaci√≥n.
      */
-    void
-	setRotation(const sf::Vector2f& _rotation) {
+    void setRotation(const Vector2& _rotation)
+    {
         rotation = _rotation;
     }
 
@@ -88,44 +103,67 @@ public:
      * @brief Establece la escala del objeto.
      * @param _scale Nueva escala.
      */
-    void
-	setScale(const sf::Vector2f& _scale) {
+    void setScale(const Vector2& _scale)
+    {
         scale = _scale;
     }
 
     /**
-     * @brief Obtiene la posiciÛn del objeto.
-     * @return Referencia a la posiciÛn.
+     * @brief Obtiene la posici√≥n del objeto.
+     * @return Referencia a la posici√≥n del objeto.
      */
-    sf::Vector2f& 
-    getPosition() {
+    Vector2& getPosition()
+    {
         return position;
     }
 
     /**
-     * @brief Obtiene la rotaciÛn del objeto.
-     * @return Referencia a la rotaciÛn.
+     * @brief Obtiene la rotaci√≥n del objeto.
+     * @return Referencia a la rotaci√≥n del objeto.
      */
-    sf::Vector2f& 
-    getRotation() {
+    Vector2& getRotation()
+    {
         return rotation;
     }
 
     /**
      * @brief Obtiene la escala del objeto.
-     * @return Referencia a la escala.
+     * @return Referencia a la escala del objeto.
      */
-    sf::Vector2f& 
-    getScale() {
+    Vector2& getScale()
+    {
         return scale;
     }
 
-    virtual std::string getTypeName() const override {
-        return "Transform";
+    /**
+     * @brief Obtiene un puntero a los datos de posici√≥n en memoria.
+     * @return Puntero a la posici√≥n en la memoria.
+     */
+    float* getPosData()
+    {
+        return &position.x;
+    }
+
+    /**
+     * @brief Obtiene un puntero a los datos de rotaci√≥n en memoria.
+     * @return Puntero a la rotaci√≥n en la memoria.
+     */
+    float* getRotData()
+    {
+        return &rotation.x;
+    }
+
+    /**
+     * @brief Obtiene un puntero a los datos de escala en memoria.
+     * @return Puntero a la escala en la memoria.
+     */
+    float* getScaData()
+    {
+        return &scale.x;
     }
 
 private:
-    sf::Vector2f position;
-    sf::Vector2f rotation;
-    sf::Vector2f scale;
+    Vector2 position; ///< Posici√≥n del objeto.
+    Vector2 rotation; ///< Rotaci√≥n del objeto.
+    Vector2 scale; ///< Escala del objeto.
 };
